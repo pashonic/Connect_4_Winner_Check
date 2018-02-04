@@ -1,14 +1,3 @@
-def SlopeDown(x, y):
-    return x + 1, y - 1
-
-def SlopeUp(x, y):
-    return x - 1, y - 1
-
-def Row(x, y):
-    return x + 1, y
-
-def Col(x, y):
-    return x, y + 1
 
 def Check(x, y, board, player, path):
     width = len(board[0])
@@ -29,7 +18,12 @@ def IsWinner(board, player):
     width = len(board[0])
     height = len(board)
 
-    paths = [SlopeDown, SlopeUp, Row, Col]
+    paths = [
+                lambda x, y: (x + 1, y - 1), # Slope Down
+                lambda x, y: (x - 1, y - 1), # Slope Up
+                lambda x, y: (x + 1, y), # Row
+                lambda x, y: (x, y - 1) # Col
+            ]
     for y in range(height):
         for x in range(width):
             for path in paths:
@@ -39,7 +33,7 @@ def IsWinner(board, player):
 
 board = [
             [' ',' ',' ',' ',' ',' ','B'],
-            ['B','B',' ',' ','G',' ',' '],
+            ['B','B','B',' ','G',' ',' '],
             [' ',' ','B','B',' ',' ',' '],
             [' ',' ','B',' ',' ',' ',' '],
             [' ','B','B',' ',' ','B',' '],
